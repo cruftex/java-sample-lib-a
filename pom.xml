@@ -8,6 +8,12 @@
   <name>java-sample-a</name>
   <description>Simple Java project producing a jar.</description>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jacoco-maven-plugin-version>0.7.5.201505241946</jacoco-maven-plugin-version>
+    <h7e.recycle.test.coverage>jacoco-instrument</h7e.recycle.test.coverage>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -109,9 +115,4 @@
     </profile>
   </profiles>
   
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <h7e.recycle.test.coverage>jacoco-instrument</h7e.recycle.test.coverage>
-  </properties>
-
 </project>
