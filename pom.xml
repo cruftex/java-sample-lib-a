@@ -12,6 +12,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jacoco-maven-plugin-version>0.7.5.201505241946</jacoco-maven-plugin-version>
     <h7e.recycle.test.coverage>jacoco-instrument</h7e.recycle.test.coverage>
+    <build.maven.version>3.3.3</build.maven.version>
+    <build.java.version>1.8</build.java.version>
   </properties>
 
   <dependencies>
@@ -46,7 +48,34 @@
           </execution>
         </executions>
       </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.4.1</version>
+          <executions>
+            <execution>
+              <id>enforce-versions</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireMavenVersion>
+                    <version>${build.maven.version}</version>
+                  </requireMavenVersion>
+                  <requireJavaVersion>
+                    <version>${build.java.version}</version>
+                  </requireJavaVersion>
+                  <requireOS>
+                    <family>unix</family>
+                  </requireOS>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
     </plugins>
+
   </build>
 
   <profiles>
@@ -104,7 +133,6 @@
       </build>
     </profile>
 
-    
     <!--
          profile for doing static analysis, normal report are switched off
          run with: mvn -Pstatic-analysis site
