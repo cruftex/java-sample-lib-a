@@ -23,6 +23,32 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <!-- writes out all properties. this is controlling behaviour of additional tools
+           e.g. the recycle CI server
+        -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>write-project-properties</goal>
+            </goals>
+            <configuration>
+              <outputFile>
+                ${project.build.directory}/h7e-complete.properties
+              </outputFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
   <profiles>
     <!-- enabling the jacoco agent for running the tests. results are written to target/jacoco.exec -->
     <profile>
