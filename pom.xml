@@ -18,6 +18,61 @@
   </dependencies>
 
   <profiles>
+    <!-- enabling the jacoco agent for running the tests. results are written to target/jacoco.exec -->
+    <profile>
+      <id>jacoco-instrument</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco-maven-plugin-version}</version>
+            <executions>
+              <execution>
+                <id>default-prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- profile to merge a report for the total test coverage. use it with
+         mvn -Pjacoco-merge jacoco:merge jacoco:report -->
+    <profile>
+      <id>jacoco-merge</id>
+      <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin-version}</version>
+                <configuration>
+                    <fileSets>
+                        <fileSet>
+                            <directory>${project.basedir}</directory>
+                            <includes>
+                                <include>**/*.exec</include>
+                            </includes>
+                        </fileSet>
+                    </fileSets>
+                    <destFile>${project.build.directory}/jacoco.exec</destFile>
+                </configuration>
+            </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    
     <!--
          profile for doing static analysis, normal report are switched off
          run with: mvn -Pstatic-analysis site
@@ -56,6 +111,7 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <h7e.recycle.test.coverage>jacoco-instrument</h7e.recycle.test.coverage>
   </properties>
 
 </project>
