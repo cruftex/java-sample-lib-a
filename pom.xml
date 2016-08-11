@@ -2,11 +2,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.cruftex</groupId>
-  <artifactId>java-sample-a</artifactId>
+  <artifactId>java-sample-lib-a</artifactId>
   <packaging>jar</packaging>
   <version>0.1-SNAPSHOT</version>
-  <name>java-sample-a</name>
-  <description>Simple Java project producing a jar.</description>
+  <name>java-sample-lib-a</name>
+  <description>Simple Java library project producing a jar. Used for testing CI jobs.</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
